@@ -1,74 +1,47 @@
-# Generates a csv file where each row contains: (Artist Name, Artist ID, Song Name, Song ID, Song Lyrics)
-from time import sleep
-from dotenv import load_dotenv
-from lyricsgenius import Genius
-from bs4 import BeautifulSoup
-import requests
-import pathlib
+### Adds song chart rows to the song chart. Checks to ensure an artist is not repeated.
 import csv
+import chart_helper as ch
 import os
+import pathlib
 
-# Stores all song chart data
-song_chart = []
-
-# Loads .env, which contains the client token
-load_dotenv()
-
-# Initializes the Genius API client token
-client_token = os.getenv("CLIENT_TOKEN")
-
-# Creates filepath for lyrics
+# Redirects to root path
 file_path = os.path.abspath('.') + ('/')
-pathlib.Path(file_path + 'lyrics/').mkdir(exist_ok=True) # Creates the lyrics directory if it does not currently exist
 
-### Returns a list of the top 500 artist names
-def get_names(file):
-    # Stores artist names
-    artist_names = []
+### Given a name, writes the assoicated rows to the song chart
+def write_row(name):
+    # Gets the artist's row
+    row = ch.get_artist_data(name)
 
-    # Iterate througn the top 500 artists and store their names in artist_names
-    with open(file, newline='', encoding='utf-8') as csvfile:
-        # Initializes the CSV reader
-        csvreader = csv.reader(csvfile, delimiter=',')
+    # Append data to a CSV file
+    with open('song_chart.csv', 'a', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerows(row)
 
-        # Skips the first (header) row
-        next(csvreader)
+    # Confirmation
+    print('song_chart.csv appended successfully!')
 
-        for row in csvreader:
-            # print(row)
-            artist_names.append(row[1])
+    # Adds artist name to known.txt
+    with open('known.txt', 'a+', encoding='utf-8') as known:
+        known.write(name + '\n')
 
-    return artist_names
+    # Confirmation
+    print('known.txt appended successfully!')
 
-# print(get_names('top_500_spotify_artists.csv'))
-
-### Given an artist name from artist_names, searches it in the Genius API and returns its (Artist Name, Artist ID, Song Name, Song ID, Lyrics)
-def get_artist_data(name):
-    # Stores all the tracks from the same artist
-    artist_data = []
+# Opens and stores all known artist names
+with open('known.txt', 'r', encoding='utf-8') as known:
+    # Move file pointer to beginning
+    known.seek(0, 0)
     
-    # Initialize Genius search
-    genius = Genius(client_token)
+    # List of all known names
+    known_names = known.readlines()
+    
+# print(known_names)
 
-    # Searches for Artist object associated with name
-    artist = genius.search_artist(name, max_songs=20)
+# Loops through all 500 artists
+for name in ch.get_names('top_500_spotify_artists.csv'):
+    # Checks if the name is in known.txt, i.e. it has already been added to the chart
+    if name + '\n' in known_names:
+        print(f'{name} has already been recorded.')
 
-    # Loops through each song in the artist's catalogue
-    for i in range(len(artist.songs)):
-        row = (name, artist.id, artist.songs[i].title, artist.songs[i].id, artist.songs[i].lyrics)
-        artist_data.append(row)
-
-    return artist_data   
-
-names = get_names("top_500_spotify_artists.csv")
-
-for name in names:
-    song_chart.extend(get_artist_data(name))
-
-# Save data to a CSV file
-with open('song_chart.csv', 'w', newline='', encoding='utf-8') as f:
-    writer = csv.writer(f)
-    writer.writerow(['Artist Name', 'Artist ID', 'Song Title', 'Song ID', 'Song Lyrics'])
-    writer.writerows(song_chart)
-
-print('song_chart.csv saved successfully!')
+    else:
+        write_row(name)
