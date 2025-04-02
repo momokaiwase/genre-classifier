@@ -18,14 +18,14 @@ def write_row(name):
         writer.writerows(row)
 
     # Confirmation
-    print('song_chart.csv appended successfully!')
+    print('--song_chart.csv appended successfully!--')
 
     # Adds artist name to known.txt
     with open('known.txt', 'a+', encoding='utf-8') as known:
         known.write(name + '\n')
 
     # Confirmation
-    print('known.txt appended successfully!')
+    print('--known.txt appended successfully!--')
 
 # Opens and stores all known artist names
 with open('known.txt', 'r', encoding='utf-8') as known:

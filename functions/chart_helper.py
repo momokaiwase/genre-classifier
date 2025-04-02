@@ -4,6 +4,9 @@ from lyricsgenius import Genius
 import csv
 import os
 
+# Global variable for storing max song search per artist. --MODIFY THIS VARIABLE TO ALTER NUMBER OF SONGS PER ARTIST--
+MAX_SONGS = 15
+
 # Stores all song chart data
 song_chart = []
 
@@ -43,7 +46,7 @@ def get_artist_data(name):
     genius = Genius(client_token)
 
     # Searches for Artist object associated with name
-    artist = genius.search_artist(name, max_songs=20)
+    artist = genius.search_artist(name, max_songs=MAX_SONGS)
 
     # Loops through each song in the artist's catalogue
     for i in range(len(artist.songs)):
