@@ -46,7 +46,13 @@ def get_artist_data(name):
     genius = Genius(client_token)
 
     # Searches for Artist object associated with name
-    artist = genius.search_artist(name, max_songs=MAX_SONGS)
+    # This loop keeps retrying the search whenever a timeout occurs
+    while True:
+        try:
+            artist = genius.search_artist(name, max_songs=MAX_SONGS)
+            break
+        except:
+            pass
 
     # Loops through each song in the artist's catalogue
     for i in range(len(artist.songs)):

@@ -24,6 +24,10 @@ Contents of `.env`:
 
 Currently, data collection relies on `top_500_spotify_artists.csv` and `functions/make_song_chart.py`. The CSV file contains the top 500 artists on Spotify currently, scraped from [this website](https://kworb.net/spotify/listeners.html) using BeautifulSoup. `functions/get_top_500.py` can be run to update the CSV file.
 
+`song_chart.csv` contains the data necessary for this project, containing (Artist Name, Artist ID, Song Name, Song ID, Song Lyrics).
+
+`make_song_chart.py` tracks what artists have already been searched, so when run will continuously search the remaining artists. If a timeout occurs, it will restart the search for that artist.
+
 
 ## Authors
 
@@ -37,7 +41,7 @@ The top 500 artists are sourced from [this website](https://kworb.net/spotify/li
 
 **Solved 4/1/2025:** ~~Implement a tracker to workaround API timeouts.~~
 
-API request timeouts are still an issue, though we are not repeating searches. Searches simply do not complete sometimes; we may need to adjust song searches per author to limit request time.
+**Solved 4/2/2025:** ~~Implement a way to keep the Genius search running even after a timeout.~~
 
 ## File Hierarchy
 
