@@ -28,6 +28,8 @@ Currently, data collection relies on `top_500_spotify_artists.csv` and `function
 
 `make_song_chart.py` tracks what artists have already been searched, so when run will continuously search the remaining artists. If a timeout occurs, it will restart the search for that artist.
 
+It should be noted that some artists, like 50 Cent and Jay-Z, are unable to have full searches done on them for some reason; the API will keep timing out no matter how many times we try and search, therefore we are omitting these artists and any future artists that have the same issue.
+
 
 ## Authors
 
@@ -42,6 +44,8 @@ The top 500 artists are sourced from [this website](https://kworb.net/spotify/li
 **Solved 4/1/2025:** ~~Implement a tracker to workaround API timeouts.~~
 
 **Solved 4/2/2025:** ~~Implement a way to keep the Genius search running even after a timeout.~~
+
+**Solved 4/4/2025:** ~~Add a search limit to prevent infinitely searching an artist in case their search keeps timing out.~~
 
 ## File Hierarchy
 

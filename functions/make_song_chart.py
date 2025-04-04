@@ -12,6 +12,10 @@ def write_row(name):
     # Gets the artist's row
     row = ch.get_artist_data(name)
 
+    # Escape case if there is an infinite search loop
+    if row == False:
+        return f"{name} could not be searched."
+
     # Append data to a CSV file
     with open('song_chart.csv', 'a', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
@@ -37,6 +41,9 @@ with open('known.txt', 'r', encoding='utf-8') as known:
     
 # print(known_names)
 
+# List containing artist names that should be skipped. Add any artist names that cannot search fully.
+skip = ['50 Cent', 'JAY-Z']
+
 # Loops through all 500 artists
 for name in ch.get_names('top_500_spotify_artists.csv'):
     # Checks if the name is in known.txt, i.e. it has already been added to the chart
@@ -44,4 +51,7 @@ for name in ch.get_names('top_500_spotify_artists.csv'):
         print(f'{name} has already been recorded.')
 
     else:
+        if name in skip:
+            print(f'--Skipping {name}--')
+            continue
         write_row(name)
