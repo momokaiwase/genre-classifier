@@ -2,7 +2,6 @@
 import csv
 import chart_helper as ch
 import os
-import pathlib
 
 # Redirects to root path
 file_path = os.path.abspath('.') + ('/')
