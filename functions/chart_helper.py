@@ -61,6 +61,10 @@ def get_artist_data(name):
             reset_count += 1
             pass
 
+    #resolves artist NoneType error
+    if artist is None:
+        return False
+    
     # Loops through each song in the artist's catalogue
     for i in range(len(artist.songs)):
         row = (name, artist.id, artist.songs[i].title, artist.songs[i].id, artist.songs[i].lyrics.replace('\n',' '))

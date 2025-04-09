@@ -41,7 +41,7 @@ with open('known.txt', 'r', encoding='utf-8') as known:
 # print(known_names)
 
 # List containing artist names that should be skipped. Add any artist names that cannot search fully.
-skip = ['50 Cent', 'JAY-Z']
+skip = ['50 Cent', 'JAY-Z', 'The Notorious B.I.G.', 'Dr. Dre', 'George Michael']
 
 # Loops through all 500 artists
 for name in ch.get_names('top_500_spotify_artists.csv'):
