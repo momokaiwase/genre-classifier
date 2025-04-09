@@ -1,4 +1,4 @@
-### Contains helper functions for making song chart rows.
+### Contains helper functions for making, navigating, and reading song chart rows.
 from dotenv import load_dotenv
 from lyricsgenius import Genius
 import csv
@@ -16,7 +16,7 @@ load_dotenv()
 # Initializes the Genius API client token
 client_token = os.getenv("CLIENT_TOKEN")
 
-### Returns a list of the top 500 artist names
+### Returns a list of the top artist names
 def get_names(file):
     # Stores artist names
     artist_names = []
@@ -71,3 +71,19 @@ def get_artist_data(name):
         artist_data.append(row)
 
     return artist_data   
+
+### Given a list of artist names, returns a list of all song titles attributed to those artists.
+def get_titles(names):
+    # Stores song titles
+    res = []
+
+    with open('song_chart.csv', newline='', encoding='utf-8') as csvfile:
+        # Initialize the CSV reader
+        csvreader = csv.reader(csvfile)
+
+        # For each row, if the artist is in the names parameter, add the song name to the result
+        for row in csvreader:
+            if row[0] in names:
+                res.append(row[2])
+    
+    return res
