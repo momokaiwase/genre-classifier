@@ -44,7 +44,7 @@ with open('known.txt', 'r', encoding='utf-8') as known:
 skip = ['50 Cent', 'JAY-Z', 'The Notorious B.I.G.', 'Dr. Dre', 'George Michael']
 
 # Loops through all 500 artists
-for name in ch.get_names('top_500_spotify_artists.csv'):
+for name in ch.get_names('top_spotify_artists.csv'):
     # Checks if the name is in known.txt, i.e. it has already been added to the chart
     if name + '\n' in known_names:
         print(f'{name} has already been recorded.')

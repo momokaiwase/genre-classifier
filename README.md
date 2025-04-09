@@ -22,11 +22,11 @@ Contents of `.env`:
 
 ### Data Collection
 
-Currently, data collection relies on `top_500_spotify_artists.csv` and `functions/make_song_chart.py`. The CSV file contains the top 500 artists on Spotify currently, scraped from [this website](https://kworb.net/spotify/listeners.html) using BeautifulSoup. `functions/get_top_500.py` can be run to update the CSV file.
+Currently, data collection relies on `top_spotify_artists.csv` and `functions/make_song_chart.py`. The CSV file contains the top artists on Spotify currently, scraped from [this website](https://kworb.net/spotify/listeners.html) using BeautifulSoup. The number of artists is determined by the number specified in `functions/get_top.py`. It is currently set for 1000.
 
 `song_chart.csv` contains the data necessary for this project, containing (Artist Name, Artist ID, Song Name, Song ID, Song Lyrics).
 
-`make_song_chart.py` tracks what artists have already been searched, so when run will continuously search the remaining artists. If a timeout occurs, it will restart the search for that artist.
+`make_song_chart.py` tracks what artists have already been searched, so when run will continuously search the remaining artists. If a timeout occurs, it will restart the search for that artist. If 10 searches occur without a successful search, the artist is skipped.
 
 It should be noted that some artists, like 50 Cent and Jay-Z, are unable to have full searches done on them for some reason; the API will keep timing out no matter how many times we try and search, therefore we are omitting these artists and any future artists that have the same issue.
 
@@ -37,7 +37,7 @@ This project is a collaborative effort between Momoka Iwase, Tiffany Kwak, Brian
 
 ## Sources
 
-The top 500 artists are sourced from [this website](https://kworb.net/spotify/listeners.html).
+The top artists are sourced from [this website](https://kworb.net/spotify/listeners.html).
 
 ## To Do
 
@@ -46,6 +46,8 @@ The top 500 artists are sourced from [this website](https://kworb.net/spotify/li
 **Solved 4/2/2025:** ~~Implement a way to keep the Genius search running even after a timeout.~~
 
 **Solved 4/4/2025:** ~~Add a search limit to prevent infinitely searching an artist in case their search keeps timing out.~~
+
+**Solved 4/9/2025:** ~~Scrape another 500 artists.~~
 
 ## File Hierarchy
 
@@ -59,9 +61,9 @@ Directory containing essential functions.
 
 Python file that contains helper functions for creating the song chart.
 
-#### `get_top_500.py`
+#### `get_top.py`
 
-Python file that scrapes the top 500 Spotify artists and saves them in `top_500_spotify_artists.csv`.
+Python file that scrapes the top Spotify artists and saves them in `top_500_spotify_artists.csv`. The number of artists saved is specified within the file.
 
 #### `make_song_chart.py`
 
@@ -75,6 +77,6 @@ Text file containing artists that have already been searched.
 
 CSV file where each row is a song. The columns are as follows: Artist Name, Artist ID, Song Name, Song ID, Song Lyrics.
 
-### `top_500_spotify_artists.csv`
+### `top_spotify_artists.csv`
 
-Text file that contains the top 500 Spotify artists.
+Text file that contains the top Spotify artists.
