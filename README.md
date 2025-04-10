@@ -49,17 +49,25 @@ The top artists are sourced from [this website](https://kworb.net/spotify/listen
 
 **Solved 4/9/2025:** ~~Scrape another 500 artists.~~
 
+**Solved 4/9/2025:** ~~Added genre sort with known song tracker.~~
+
+Genre classifying takes a really long time because of the method of search. We should try to find a better way to tag them, but with the specific tags that Genius gives us this may be difficult.
+
 ## File Hierarchy
 
 This is an overview of the files and directories in this repository.
 
-### `functions`
+### `functions/`
 
 Directory containing essential functions.
 
 #### `chart_helper.py`
 
 Python file that contains helper functions for creating the song chart.
+
+#### `genre_sort.py`
+
+Python file that sorts songs by their genre tag. Genius provides 6 genre tags: [rap, pop, r-b, rock, country, non-music]. 
 
 #### `get_top.py`
 
@@ -68,6 +76,38 @@ Python file that scrapes the top Spotify artists and saves them in `top_500_spot
 #### `make_song_chart.py`
 
 Python file that creates the song chart, saved in `song_chart.csv`.
+
+### `genres/`
+
+Directory containing text files for each genre, as well as for failed searches.
+
+#### `country.txt`
+
+Text file containing songs tagged with the country genre.
+
+#### `failed.txt`
+
+Text file containing songs that failed to get tagged within the 1-50 page limit.
+
+#### `non-music.txt`
+
+Text file containing songs tagged with the non-music genre.
+
+#### `pop.txt`
+
+Text file containing songs tagged with the pop genre.
+
+#### `r-b.txt`
+
+Text file containing songs tagged with the r-b genre.
+
+#### `rap.txt`
+
+Text file containing songs tagged with the rap genre.
+
+#### `rock.txt`
+
+Text file containing songs tagged with the rock genre.
 
 ### `known.txt`
 

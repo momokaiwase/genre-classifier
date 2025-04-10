@@ -4,7 +4,7 @@ import chart_helper as ch
 import os
 
 # Redirects to root path
-file_path = os.path.abspath('.') + ('/')
+file_path = os.path.abspath('.') + ('/') # I don't think we actually need this but I'm too afraid of deleting it and fucking something up
 
 ### Given a name, writes the assoicated rows to the song chart
 def write_row(name):
@@ -13,7 +13,7 @@ def write_row(name):
 
     # Escape case if there is an infinite search loop
     if row == False:
-        return f"{name} could not be searched."
+        return f"---{name} could not be searched.---"
 
     # Append data to a CSV file
     with open('song_chart.csv', 'a', newline='', encoding='utf-8') as f:
@@ -21,14 +21,14 @@ def write_row(name):
         writer.writerows(row)
 
     # Confirmation
-    print('--song_chart.csv appended successfully!--')
+    print('---song_chart.csv appended successfully!---')
 
     # Adds artist name to known.txt
     with open('known.txt', 'a+', encoding='utf-8') as known:
         known.write(name + '\n')
 
     # Confirmation
-    print('--known.txt appended successfully!--')
+    print('---known.txt appended successfully!---')
 
 # Opens and stores all known artist names
 with open('known.txt', 'r', encoding='utf-8') as known:
@@ -47,10 +47,10 @@ skip = ['50 Cent', 'JAY-Z', 'The Notorious B.I.G.', 'Dr. Dre', 'George Michael']
 for name in ch.get_names('top_spotify_artists.csv'):
     # Checks if the name is in known.txt, i.e. it has already been added to the chart
     if name + '\n' in known_names:
-        print(f'{name} has already been recorded.')
+        print(f'---{name} has already been recorded.---')
 
     else:
         if name in skip:
-            print(f'--Skipping {name}--')
+            print(f'---Skipping {name}---')
             continue
         write_row(name)

@@ -1,8 +1,7 @@
-### Sorts songs by genre tag.
+### Sorts songs by genre tag various text documents.
 from dotenv import load_dotenv
 from lyricsgenius import Genius
 import chart_helper as ch
-import csv
 import os
 
 # Loads .env, which contains the client token
@@ -11,7 +10,7 @@ load_dotenv()
 # Initializes the Genius API client token
 client_token = os.getenv("CLIENT_TOKEN")
 
-### Given a list of song names, returns a dictionary where each key is a genre tag, and each key's value is a list of songs within that genre
+### Given a list of song names, sorts songs by genre in their respective text files in the genres/ folder
 def genre_sort(songs):
     # Initizalizes Genius search
     genius = Genius(client_token)
@@ -20,17 +19,34 @@ def genre_sort(songs):
     tags = ['rap', 'pop', 'r-b', 'rock', 'country', 'non-music']
 
     # Stores the final genre dictionary
-    genre_dict = {'rap':[], 'pop':[], 'r-b':[], 'rock':[], 'country':[], 'non-music':[]}
+    # genre_dict = {'rap':[], 'pop':[], 'r-b':[], 'rock':[], 'country':[], 'non-music':[]}
+
+    # Creates list of sorted songs
+    sorted_songs = []
+    files = ['genres/rap.txt', 'genres/pop.txt', 'genres/r-b.txt', 'genres/rock.txt', 'genres/country.txt', 'genres/non-music.txt', 'genres/failed.txt']
+    for filename in files:
+        with open(filename, 'r', encoding='utf-8') as known:
+            # Move file pointer to beginning for reading
+            known.seek(0, 0)
+
+            sorted_songs.extend(known.readlines())
+
+    print(sorted_songs)
 
     # Iterate through the songs. For each song, continue searching each tag until a hit is found.
     for song in songs:
+        # If the song has already been sorted, skip it
+        if song + '\n' in sorted_songs:
+            print(f"---{song} has already been tagged.---")
+            continue
+
         # Tracks whether the song has been tagged
         tagged = False
 
         # Begins at page 1 of the search
         page = 1
 
-        while page and not tagged:
+        while page <= 50 and not tagged: # Genius will not return results after the 50th page
             print(f"---Current Page: {page}---")
 
             # Search each genre tag
@@ -38,11 +54,15 @@ def genre_sort(songs):
             # Searches the tag results for the song
             print("---Searching rap...---")
             for hit in rap_res['hits']:
-                print(hit)
-                # If the song is within the genre tag, append it to the respective genre_dict key
+                # print(hit)
+                # If the song is within the genre tag, write it to the respective genre text file
                 if hit['title'] == song:
                     print("---Hit found in rap!---")
-                    genre_dict['rap'].append(song)
+
+                    # Append the song to the genre text file
+                    with open('genres/rap.txt', 'a', encoding='utf-8') as rap:
+                        rap.write(song + '\n')
+
                     tagged = True
                 else:
                     print("---Failed to find hit in rap.---")
@@ -51,11 +71,15 @@ def genre_sort(songs):
             # Searches the tag results for the song
             print("---Searching pop...---")
             for hit in pop_res['hits']:
-                print(hit)
-                # If the song is within the genre tag, append it to the respective genre_dict key
+                # print(hit)
+                # If the song is within the genre tag, write it to the respective genre text file
                 if hit['title'] == song:
                     print("---Hit found in pop!---")
-                    genre_dict['pop'].append(song)
+                    
+                    # Append the song to the genre text file
+                    with open('genres/pop.txt', 'a', encoding='utf-8') as pop:
+                        pop.write(song + '\n')
+
                     tagged = True
                 else:
                     print("---Failed to find hit in pop.---")
@@ -64,11 +88,15 @@ def genre_sort(songs):
             # Searches the tag results for the song
             print("---Searching r-b...---")
             for hit in rb_res['hits']:
-                print(hit)
-                # If the song is within the genre tag, append it to the respective genre_dict key
+                # print(hit)
+                # If the song is within the genre tag, write it to the respective genre text file
                 if hit['title'] == song:
                     print("---Hit found in r-b!---")
-                    genre_dict['r-b'].append(song)
+                    
+                    # Append the song to the genre text file
+                    with open('genres/r-b.txt', 'a', encoding='utf-8') as rb:
+                        rb.write(song + '\n')
+
                     tagged = True
                 else:
                     print("---Failed to find hit in r-b.---")
@@ -77,11 +105,15 @@ def genre_sort(songs):
             # Searches the tag results for the song
             print("---Searching rock...---")
             for hit in rock_res['hits']:
-                print(hit)
-                # If the song is within the genre tag, append it to the respective genre_dict key
+                # print(hit)
+                # If the song is within the genre tag, write it to the respective genre text file
                 if hit['title'] == song:
                     print("---Hit found in rock!---")
-                    genre_dict['rock'].append(song)
+                    
+                    # Append the song to the genre text file
+                    with open('genres/rock.txt', 'a', encoding='utf-8') as rock:
+                        rock.write(song + '\n')
+
                     tagged = True
                 else:
                     print("---Failed to find hit in rock.---")
@@ -90,11 +122,15 @@ def genre_sort(songs):
             # Searches the tag results for the song
             print("---Searching country...---")
             for hit in country_res['hits']:
-                print(hit)
-                # If the song is within the genre tag, append it to the respective genre_dict key
+                # print(hit)
+                # If the song is within the genre tag, write it to the respective genre text file
                 if hit['title'] == song:
                     print("---Hit found in country!---")
-                    genre_dict['country'].append(song)
+                    
+                    # Append the song to the genre text file
+                    with open('genres/country.txt', 'a', encoding='utf-8') as country:
+                        country.write(song + '\n')
+
                     tagged = True
                 else:
                     print("---Failed to find hit in country.---")
@@ -103,26 +139,37 @@ def genre_sort(songs):
             # Searches the tag results for the song
             print("---Searching non-music...---")
             for hit in non_res['hits']:
-                print(hit)
-                # If the song is within the genre tag, append it to the respective genre_dict key
+                # print(hit)
+                # If the song is within the genre tag, write it to the respective genre text file
                 if hit['title'] == song:
                     print("---Hit found in non-music!---")
-                    genre_dict['non-music'].append(song)
+                    
+                    # Append the song to the genre text file
+                    with open('genres/non-music.txt', 'a', encoding='utf-8') as non:
+                        non.write(song + '\n')
+
                     tagged = True
                 else:
                     print("---Failed to find hit in non-music.---")
+
+            # Add song to failed search text document if not found within 50 pages
+            if page == 50:
+                print(f"---Search for {song} failed. Adding to failed.txt.---")
+                with open('genres/failed.txt', 'a', encoding='utf-8') as failed:
+                    failed.write(song + '\n')
 
             page += 1
 
         print(f"---{song} has been successfully tagged!---")
 
-    return genre_dict
+    print("---Sorting completed.---")
+    # return genre_dict
             
 # Retrieves the first 500 artists and their songs
 artists = ch.get_names("top_spotify_artists.csv")[0:500] 
 songs = ch.get_titles(artists)
 
-print(genre_sort(songs))
+genre_sort(songs)
 
-### Debug to ensure tagging actually works. Running the below should find a hit on the 2nd page, then should output the dictionary with 'DNA.' in the rap key.  
-# print(genre_sort(['DNA.'])) 
+### Debug to ensure tagging actually works.
+# genre_sort(['DNA.'])
