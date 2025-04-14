@@ -36,6 +36,10 @@ This project is a collaborative effort between Momoka Iwase, Tiffany Kwak, Brian
 
 The top artists are sourced from [this website](https://kworb.net/spotify/listeners.html).
 
+The documentation for the LyricsGenius library can be found [here](https://lyricsgenius.readthedocs.io/en/master/index.html).
+
+TheAudioDB API's documentation can be found [here](https://www.theaudiodb.com/).
+
 ## To Do
 
 **Solved 4/1/2025:** ~~Implement a tracker to workaround API timeouts.~~
