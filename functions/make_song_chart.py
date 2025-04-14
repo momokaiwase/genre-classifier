@@ -54,3 +54,4 @@ for name in ch.get_names('top_spotify_artists.csv'):
             print(f'---Skipping {name}---')
             continue
         write_row(name)
+        print(f'---Rows for {name} have been successfully recorded!---')
