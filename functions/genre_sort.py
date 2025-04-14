@@ -50,33 +50,115 @@ def genre_sort(songs):
             print(f"---Current Page: {page}---")
 
             # Search each genre tag
-            for tag in tags:
-                print(f"---Searching {tag}...---")
-                res = genius.tag(tags[0], page=page)
-            
-                # Searches the tag results for the song
-                
-                for hit in res['hits']:
-                    # print(hit)
-                    # If the song is within the genre tag, write it to the respective genre text file
-                    if hit['title'] == song:
-                        print(f"---Hit found in {tag}!---")
+            rap_res = genius.tag(tags[0], page=page)
+            # Searches the tag results for the song
+            print("---Searching rap...---")
+            for hit in rap_res['hits']:
+                # print(hit)
+                # If the song is within the genre tag, write it to the respective genre text file
+                if hit['title'] == song:
+                    print("---Hit found in rap!---")
 
-                        # Append the song to the genre text file
-                        with open(f'genres/{tag}.txt', 'a', encoding='utf-8') as genre_file:
-                            genre_file.write(song + '\n')
-                        tagged = True
-                        break
-                    else:
-                        print(f"---Failed to find hit in {tag}.---")
-                
-                page += 1
+                    # Append the song to the genre text file
+                    with open('genres/rap.txt', 'a', encoding='utf-8') as rap:
+                        rap.write(song + '\n')
 
-        # Add song to failed search text document if not found within 50 pages
-        if not tagged:
-            print(f"---Search for {song} failed. Adding to failed.txt.---")
-            with open('genres/failed.txt', 'a', encoding='utf-8') as failed:
-                failed.write(song + '\n')
+                    tagged = True
+                else:
+                    print("---Failed to find hit in rap.---")
+
+            pop_res = genius.tag(tags[1], page=page)
+            # Searches the tag results for the song
+            print("---Searching pop...---")
+            for hit in pop_res['hits']:
+                # print(hit)
+                # If the song is within the genre tag, write it to the respective genre text file
+                if hit['title'] == song:
+                    print("---Hit found in pop!---")
+                    
+                    # Append the song to the genre text file
+                    with open('genres/pop.txt', 'a', encoding='utf-8') as pop:
+                        pop.write(song + '\n')
+
+                    tagged = True
+                else:
+                    print("---Failed to find hit in pop.---")
+
+            rb_res = genius.tag(tags[2], page=page)
+            # Searches the tag results for the song
+            print("---Searching r-b...---")
+            for hit in rb_res['hits']:
+                # print(hit)
+                # If the song is within the genre tag, write it to the respective genre text file
+                if hit['title'] == song:
+                    print("---Hit found in r-b!---")
+                    
+                    # Append the song to the genre text file
+                    with open('genres/r-b.txt', 'a', encoding='utf-8') as rb:
+                        rb.write(song + '\n')
+
+                    tagged = True
+                else:
+                    print("---Failed to find hit in r-b.---")
+
+            rock_res = genius.tag(tags[3], page=page)
+            # Searches the tag results for the song
+            print("---Searching rock...---")
+            for hit in rock_res['hits']:
+                # print(hit)
+                # If the song is within the genre tag, write it to the respective genre text file
+                if hit['title'] == song:
+                    print("---Hit found in rock!---")
+                    
+                    # Append the song to the genre text file
+                    with open('genres/rock.txt', 'a', encoding='utf-8') as rock:
+                        rock.write(song + '\n')
+
+                    tagged = True
+                else:
+                    print("---Failed to find hit in rock.---")
+
+            country_res = genius.tag(tags[4], page=page)
+            # Searches the tag results for the song
+            print("---Searching country...---")
+            for hit in country_res['hits']:
+                # print(hit)
+                # If the song is within the genre tag, write it to the respective genre text file
+                if hit['title'] == song:
+                    print("---Hit found in country!---")
+                    
+                    # Append the song to the genre text file
+                    with open('genres/country.txt', 'a', encoding='utf-8') as country:
+                        country.write(song + '\n')
+
+                    tagged = True
+                else:
+                    print("---Failed to find hit in country.---")
+
+            non_res = genius.tag(tags[5], page=page)
+            # Searches the tag results for the song
+            print("---Searching non-music...---")
+            for hit in non_res['hits']:
+                # print(hit)
+                # If the song is within the genre tag, write it to the respective genre text file
+                if hit['title'] == song:
+                    print("---Hit found in non-music!---")
+                    
+                    # Append the song to the genre text file
+                    with open('genres/non-music.txt', 'a', encoding='utf-8') as non:
+                        non.write(song + '\n')
+
+                    tagged = True
+                else:
+                    print("---Failed to find hit in non-music.---")
+
+            # Add song to failed search text document if not found within 50 pages
+            if page == 50:
+                print(f"---Search for {song} failed. Adding to failed.txt.---")
+                with open('genres/failed.txt', 'a', encoding='utf-8') as failed:
+                    failed.write(song + '\n')
+
+            page += 1
 
         print(f"---{song} has been successfully tagged!---")
 
