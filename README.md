@@ -3,12 +3,9 @@
 
 ## Installation & Usage
 
-Ensure you have the following libraries installed:
+All libraries that should be installed are in requirements.txt. Ensure you have the libraries installed:
 
-    pip install requests
-    pip install beautifulsoup4
-    pip install lyricsgenius
-    pip install dotenv
+    pip install -r requirements.txt
 
 ### Data Acquisiton & Enabling Genius Search
 
@@ -56,6 +53,22 @@ Genre classifying takes a really long time because of the method of search. We s
 ## File Hierarchy
 
 This is an overview of the files and directories in this repository.
+
+### `classification/`
+
+Directory containing different data classification methods.
+
+### `data exploration/`
+
+Directory containing data exploration methods.
+
+#### `title_cluster.py`
+
+Python file that executes k-means clustering for song titles.
+
+#### `word_cluster.py`
+
+Python file that executes LDA topic clustering for song lyrics.
 
 ### `functions/`
 
