@@ -54,7 +54,7 @@ TheAudioDB API's documentation can be found [here](https://www.theaudiodb.com/).
 
 **Solved 4/14/2025:** ~~Genre classifying takes a really long time because of the method of search. We should try to find a better way to tag them, but with the specific tags that Genius gives us this may be difficult.~~
 
-TheAudioDB API allows us to easily sort by genres; however, we are waiting on an API key to properly utilize it.
+**Solved 4/15/2025:** ~~TheAudioDB API allows us to easily sort by genres; however, we are waiting on an API key to properly utilize it.~~
 
 ## File Hierarchy
 
