@@ -1,12 +1,12 @@
 ### Sorts songs by genre tag various text documents.
-from lyricsgenius import Genius
 import chart_helper as ch
 import requests
 import json
 import os
 
+# Init TheAudioDB API key
 db_token = os.getenv("DB_TOKEN")
-print(db_token)
+# print(db_token)
 
 ### Given an artist and song, sorts it into respective text files in the genres/ directory
 def genre_sort(artist, song):
@@ -64,8 +64,10 @@ names = ch.get_names('top_spotify_artists.csv')
 
 # Iterates through the names, gets their songs, then sorts them into the respective genres
 for name in names:
-    for song in ch.get_titles(name):
+    for song in ch.get_artist_titles(name):
         genre_sort(name, song)
     print(f'***{name}\'s songs have been successfully sorted!***')
+
+# genre_sort("kendrick_lamar", "m.a.a.d city")
 
 # genre_sort('Coldplay', 'Yellow')
