@@ -57,15 +57,15 @@ for h in titlestoks:
     titlevectors.append(totvec)
 
 #k-means clustering - how many clusters is set beforehand: 
-kmnews = KMeans(n_clusters=10, random_state=0)
+kmnews = KMeans(n_clusters=6, random_state=0)
 titleclusters = kmnews.fit_predict(titlevectors)
 
 # see what the clusters look like
 # The `k-means fit_predict()` function in scikit returns a list containing a single integer for every input vector corresponding to the cluster ID that vector was assigned to. 
 # iterate through that list of cluster assignments
 # we can print out all the titles that belong to one of the clusters.
-cluster = 11
-with open(f"cluster_{cluster}_titles.txt", "w", encoding="utf-8") as f:
-    for i in range(len(titleclusters)):
-        if titleclusters[i] == cluster:
-            f.write(titles[i] + "\n")
+for cluster in range(6):
+    with open(f"cluster_{cluster+1}_titles.txt", "w", encoding="utf-8") as f:
+        for i in range(len(titleclusters)):
+            if titleclusters[i] == cluster:
+                f.write(titles[i] + "\n")
