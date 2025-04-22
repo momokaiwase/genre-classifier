@@ -21,7 +21,7 @@ titles = []     # this will store the original song titles
 titlestoks = []  # this will store the lists of tokens in those titles
 
 #data file should be a text file contain one title per line
-f = open("train_non_clickbait.txt")
+f = open("data exploration/streamedsongs421_titles.txt")
 for line in f:
     line = line.rstrip()
     titles.append(line)

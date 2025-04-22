@@ -21,7 +21,7 @@ for index, row in sampled_df.iterrows():
   lyrics = row['text']
 
   # Create the prompt
-  prompt = f"What genre are the following lyrics? Answer only with '1' (rap), '2' (pop), '3' (R&B), '4' (rock), '5' (country): {lyrics}"
+  prompt = f"What genre are the following lyrics? Answer only with '1' (rap), '2' (pop), '3' (R&B), '4' (rock), '5' (country), '6' (EDM): {lyrics}"
 
   # Put it in the MESSAGES variable that will get passed
   # to Mistral.
