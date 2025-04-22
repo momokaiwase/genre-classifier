@@ -3,6 +3,15 @@
 #make sure genism, numpy==1.24.3, scipy is installed
 
 import nltk
+import ssl
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
 nltk.download('stopwords')
 
 import gensim
@@ -31,7 +40,8 @@ for line in f:
 f.close()
 
 ##IDENTIFY TOPICS
-#!wget https://github.com/eyaler/word2vec-slim/raw/refs/heads/master/GoogleNews-vectors-negative300-SLIM.bin.gz
+# brew install wget
+# wget https://github.com/eyaler/word2vec-slim/raw/refs/heads/master/GoogleNews-vectors-negative300-SLIM.bin.gz
 bigmodel = gensim.models.KeyedVectors.load_word2vec_format("GoogleNews-vectors-negative300-SLIM.bin.gz", binary=True)
 
 #read in the normalized tokens for each headline, look up their vectors in the word2vec model, 
@@ -50,13 +60,12 @@ for h in titlestoks:
 kmnews = KMeans(n_clusters=10, random_state=0)
 titleclusters = kmnews.fit_predict(titlevectors)
 
-
 # see what the clusters look like
 # The `k-means fit_predict()` function in scikit returns a list containing a single integer for every input vector corresponding to the cluster ID that vector was assigned to. 
 # iterate through that list of cluster assignments
 # we can print out all the titles that belong to one of the clusters.
-
-for i in range(len(titleclusters)):
-    if titleclusters[i] == 3: #see all titles in cluster 3
-        print(titles[i])
-
+cluster = 11
+with open(f"cluster_{cluster}_titles.txt", "w", encoding="utf-8") as f:
+    for i in range(len(titleclusters)):
+        if titleclusters[i] == cluster:
+            f.write(titles[i] + "\n")
