@@ -11,8 +11,8 @@ genre_mapping = {
 }
 
 # Input and output file names
-input_file = "songs_final422.csv"  # Replace with the actual input file name
-output_file = "genre_as_numbers.csv"
+input_file = "raw_lyrics_genrelabel.csv"  # Replace with the actual input file name
+output_file = "raw_lyrics_genrelabel_int.csv"
 
 # Read and process the data
 with open(input_file, mode="r", encoding="utf-8") as infile, open(output_file, mode="w", encoding="utf-8", newline="") as outfile:
