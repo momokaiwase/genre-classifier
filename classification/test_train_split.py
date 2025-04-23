@@ -1,24 +1,23 @@
 import csv
 from sklearn.model_selection import train_test_split
 import numpy as np
+import pandas as pd
+import os
 
 ##SPLIT TRAINING AND TESTING DATA
+#make separate csv files for split testing and training data for BERT and LLM classification
 
-#make separate csv file for only testing data for LLM classification
+#check working directory (where files will be saved): 
+# print("Current working directory:", os.getcwd())
 
-with open('final_dataset.csv', 'r') as file:
-    csv_reader = csv.reader(file)
+# Load CSV as DataFrame
+df = pd.read_csv('raw_lyrics_genrelabel_int.csv', on_bad_lines='skip', delimiter='\t')
 
-#get lyrics without stopwords removed
-X = np.genfromtxt('final_dataset.csv', delimiter=',', skip_header=1, dtype=int)
-X = X[:, :-1] #first : selects all rows, :-1 selects all except last column
+#split training and test data
+train_df, test_df = train_test_split(df[['Lyrics', 'Genre_Label']], test_size=0.2, random_state=42)
+print("Train data shape:", train_df.shape)
+print("Test data shape:", test_df.shape)
 
-print(X)
-
-#get genre integer label
-y = np.genfromtxt('final_dataset.csv', delimiter=',', skip_header=1, dtype=int)
-y = y[:, -1] #all rows, just last column
-
-print(y)
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2) #, random_state=42
+# Save to CSV with headers
+train_df.to_csv('raw_lyrics_train_dataset.csv', index=False)
+test_df.to_csv('raw_lyrics_test_dataset.csv', index=False)
