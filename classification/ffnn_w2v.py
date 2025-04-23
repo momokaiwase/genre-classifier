@@ -60,6 +60,9 @@ y_pred_probs = model.predict(X_test_scaled)
 y_pred_classes = np.argmax(y_pred_probs, axis=1)
 y_true_classes = np.argmax(y_test_cat, axis=1)
 
+print("\nClassification Report:\n")
+print(classification_report(y_true_classes, y_pred_classes, target_names=label_encoder.classes_))
+
 # Generate confusion matrix
 cm = confusion_matrix(y_true_classes, y_pred_classes)
 
