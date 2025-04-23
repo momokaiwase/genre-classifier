@@ -3,11 +3,11 @@ import csv
 # Genre mapping
 genre_mapping = {
     "Pop": 0,
-    "R&B": 1,
-    "Rap": 2,
-    "Rock": 3,
-    "Country": 4,
-    "EDM": 5
+    "Rock": 1,
+    "R&B": 2,
+    "Country": 3,
+    "EDM": 4,
+    "Rap": 5
 }
 
 # Input and output file names

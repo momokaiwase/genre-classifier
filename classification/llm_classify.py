@@ -3,6 +3,7 @@ import pandas as pd
 import time #needed to sleep() between requests
 from sklearn.metrics import classification_report
 
+
 client = Mistral(api_key="Td241z6rBzd1cQbBYETVT8l26hZIxqQo")
 
 MODEL = "mistral-large-latest"
