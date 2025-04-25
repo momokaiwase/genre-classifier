@@ -37,7 +37,7 @@ print(time.ctime())
 
 # Print out the 5 most strongly associated words for each topic
 for i in range(10):
-    words = ldamodel.show_topic(i, 5)
+    words = ldamodel.show_topic(i, 10)
     for w in words:
         print(w[0], end=", ")
     print("\n")
