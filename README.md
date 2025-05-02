@@ -81,9 +81,33 @@ This is an overview of the files and directories in this repository.
 
 Directory containing different data classification methods.
 
+#### `bert_classify.py`
+
+Python file that builds a BERT model to classify song genres, and prints evaluation metrics.
+
+#### `ffn_bow.py`
+
+Python file that builds a Feed Forward Neural Network model using bag of words to classify song genres, and prints evaluation metrics.
+
+#### `ffn_w2v.py`
+
+Python file that builds a Feed Forward Neural Network model using word2vec word embeddings to classify song genres, and prints evaluation metrics.
+
+#### `llm_classify.py`
+
+Python file that builds a Mistral AI LLM model to classify song genres, and prints evaluation metrics.
+
+#### `test_train_split.py`
+
+Helper file that splits the dataset of untokenized lyrics into a 20/80 test/train split for the LLM and BERT Classifications.
+
 ### `data exploration/`
 
 Directory containing data exploration methods.
+
+#### `get_titles.py`
+
+Helper file that collects just the song titles from the dataset of titles and lyrics.
 
 #### `title_cluster.py`
 
@@ -97,9 +121,18 @@ Python file that executes LDA topic clustering for song lyrics.
 
 Directory containing essential functions.
 
+#### `avg_token_per_song.py`
+
 #### `chart_helper.py`
 
 Python file that contains helper functions for creating the song chart.
+
+#### `dataset_raw_lyrics.py`
+Python file that generates the dataset of untokenized lyrics. Output is raw_lyrics_genrelabel.csv that has columns of Artist, Song Title, Genre, Lyrics.
+
+#### `genre_mapping.py`
+
+Python file that maps genre labels as strings into integers that tag each genre. Output is raw_lyrics_genrelabel_int.csv which is identical to raw_lyrics_genrelabel.csv except with an added column of Genre_Label with the integer tags of each genre.
 
 #### `genre_sort.py`
 
@@ -108,6 +141,8 @@ Python file that sorts songs by their genre tag using TheAudioDB API.
 #### `get_top.py`
 
 Python file that scrapes the top Spotify artists and saves them in `top_500_spotify_artists.csv`. The number of artists saved is specified within the file.
+
+#### `header.py`
 
 #### `make_song_chart.py`
 
