@@ -123,27 +123,27 @@ Python file that executes LDA topic clustering for song lyrics.
 
 ### `data exploration/`
 
-#### `cluster_1_titles.txt
+#### `cluster_1_titles.txt`
 
 Text file containing song titles in cluster 1.
 
-#### `cluster_2_titles.txt
+#### `cluster_2_titles.txt`
 
 Text file containing song titles in cluster 2.
 
-#### `cluster_3_titles.txt
+#### `cluster_3_titles.txt`
 
 Text file containing song titles in cluster 3.
 
-#### `cluster_4_titles.txt
+#### `cluster_4_titles.txt`
 
 Text file containing song titles in cluster 4.
 
-#### `cluster_5_titles.txt
+#### `cluster_5_titles.txt`
 
 Text file containing song titles in cluster 5.
 
-#### `cluster_6_titles.txt
+#### `cluster_6_titles.txt`
 
 Text file containing song titles in cluster 6.
 
@@ -155,7 +155,7 @@ Python file that retrieves song titles from `streamedsongs421.csv` and saves the
 
 Python file that creates LDA clusters for song lyrics.
 
-#### `title_cluster.py'
+#### `title_cluster.py`
 
 Python file that creates k-means clusters for song titles.
 
