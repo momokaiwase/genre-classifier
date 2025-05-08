@@ -10,4 +10,3 @@ scikit-learn==1.3.0
 mistralai
 pandas
 tensorflow==2.19.0
-gensim == 4.3.3
