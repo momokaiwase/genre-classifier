@@ -15,6 +15,8 @@ Create a file called `.env`. Within this file, create a variable called `CLIENT_
 
 In order to sort songs by genre using `genre_sort.py`, you will need to add another field to the `.env` file called `DB_TOKEN`. TheAudioDB's API tokens are given by subscription, therefore there is no default token we can use. **If you want to run `genre_sort.py`, please contact Andrew Pham for access to the key.**
 
+**DO NOT WRITE THE PRIVATE KEY INTO A PUBLICLY ACCESSIBLE FILE, IT SHOULD BE TAKEN FROM `.env`**
+
 Contents of `.env`:
 
     CLIENT_TOKEN = 'YOUR CLIENT ACCESS TOKEN'
@@ -71,7 +73,9 @@ TheAudioDB API's documentation can be found [here](https://www.theaudiodb.com/).
 
 **Solved 4/16/2025:** ~~Add more songs to account for the amount that will need to be cut from the final dataset.~~
 
-**TODO:** Genre sort the new songs.
+**Solved:** ~~Genre sort the new songs.~~
+
+**TODO:** Update README and repository; comment code in `modeling/` and `dataset_raw_lyrics.py` in `functions/`. Look over File Hierarchy, especially for the CSV files left in the root directory.
 
 ## File Hierarchy
 
@@ -81,9 +85,33 @@ This is an overview of the files and directories in this repository.
 
 Directory containing different data classification methods.
 
+#### `bert_classify.py`
+
+Python file that builds a BERT model to classify song genres, and prints evaluation metrics.
+
+#### `ffn_bow.py`
+
+Python file that builds a Feed Forward Neural Network model using bag of words to classify song genres, and prints evaluation metrics.
+
+#### `ffn_w2v.py`
+
+Python file that builds a Feed Forward Neural Network model using word2vec word embeddings to classify song genres, and prints evaluation metrics.
+
+#### `llm_classify.py`
+
+Python file that builds a Mistral AI LLM model to classify song genres, and prints evaluation metrics.
+
+#### `test_train_split.py`
+
+Helper file that splits the dataset of untokenized lyrics into a 20/80 test/train split for the LLM and BERT Classifications.
+
 ### `data exploration/`
 
 Directory containing data exploration methods.
+
+#### `get_titles.py`
+
+Helper file that collects just the song titles from the dataset of titles and lyrics.
 
 #### `title_cluster.py`
 
@@ -93,13 +121,63 @@ Python file that executes k-means clustering for song titles.
 
 Python file that executes LDA topic clustering for song lyrics.
 
+### `data exploration/`
+
+#### `cluster_1_titles.txt`
+
+Text file containing song titles in cluster 1.
+
+#### `cluster_2_titles.txt`
+
+Text file containing song titles in cluster 2.
+
+#### `cluster_3_titles.txt`
+
+Text file containing song titles in cluster 3.
+
+#### `cluster_4_titles.txt`
+
+Text file containing song titles in cluster 4.
+
+#### `cluster_5_titles.txt`
+
+Text file containing song titles in cluster 5.
+
+#### `cluster_6_titles.txt`
+
+Text file containing song titles in cluster 6.
+
+#### `get_titles.py`
+
+Python file that retrieves song titles from `streamedsongs421.csv` and saves them in `streamedsongs421_titles.txt`.
+
+#### `lyric_LDA_cluster.py`
+
+Python file that creates LDA clusters for song lyrics.
+
+#### `title_cluster.py`
+
+Python file that creates k-means clusters for song titles.
+
 ### `functions/`
 
 Directory containing essential functions.
 
+#### `avg_token_per_song.py`
+
+Python file that calculates the average token per song.
+
 #### `chart_helper.py`
 
 Python file that contains helper functions for creating the song chart.
+
+#### `dataset_raw_lyrics.py`
+
+Python file that generates the dataset of untokenized lyrics. Output is raw_lyrics_genrelabel.csv that has columns of Artist, Song Title, Genre, Lyrics.
+
+#### `genre_mapping.py`
+
+Python file that maps genre labels as strings into integers that tag each genre. Output is raw_lyrics_genrelabel_int.csv which is identical to raw_lyrics_genrelabel.csv except with an added column of Genre_Label with the integer tags of each genre.
 
 #### `genre_sort.py`
 
@@ -109,26 +187,154 @@ Python file that sorts songs by their genre tag using TheAudioDB API.
 
 Python file that scrapes the top Spotify artists and saves them in `top_500_spotify_artists.csv`. The number of artists saved is specified within the file.
 
+#### `header.py`
+
+Python file that duplicates `songs420.csv` with headers as `songs420_header.csv`.
+
 #### `make_song_chart.py`
 
 Python file that creates the song chart, saved in `song_chart.csv`.
 
 ### `genres/`
 
-Directory containing text files for each genre, as well as for failed searches.
+Directory containing respective genre directories.
+
+#### `Country/`
+
+Directory containing country songs.
+
+#### `EDM/`
+
+Directory containing EDM songs.
+
+#### `Exclude/`
+
+Directory containing excluded songs.
+
+#### `Pop/`
+
+Directory containing pop songs.
+
+#### `R&B/`
+
+Directory containing R&B songs.
+
+#### `Rap/`
+
+Directory containing rap songs.
+
+#### `Rock/`
+
+Directory containing rock songs.
+
+### `modeling/`
+
+Directory containing files necessary for modeling.
+
+#### `applying_genrelabels.ipynb`
+
+Jupyter Notebook file that applies genre labels to songs.
+
+#### `combining genre txt.ipynb`
+
+Jupyter Notebook file that combines genres.
+
+#### `makingfinaldataset.ipynb`
+
+Jupyter Notebook file that creates the final dataset.
+
+#### `naivebayesbagofwords.ipynb`
+
+Jupyter Notebook file that creates a Naive Bayes Bag of Words model.
+
+#### `nlp project data tokenization and filtering-2.ipynb`
+
+Jupyter Notebook file that tokenizes and filters song entries.
+
+#### `nlp project data tokenization and filtering.ipynb`
+
+Jupyter Notebook file that tokenizes and filters song entries.
+
+#### `RNN Training.ipynb`
+
+Jupyter Notebook file that intializes and trains the recurrent neural network.
+
+#### `SVM_songs.ipynb`
+
+Jupyter Notebook file that models the support vector machine.
+
+#### `word2vec embedding.ipynb`
+
+Jupyter Notebook file that models word2vec embeddings.
 
 ### `known.txt`
 
 Text file containing artists and songs that have already been searched.
 
+### `raw_lyrics_generelabel_int.csv`
+
+CSV file with headers [Artist, Song Title, Genre, Lyrics, Genre_Label].
+
+### `raw_lyrics_generelabel.csv`
+
+CSV file with headers [Artist, Song Title, Genre, Lyrics].
+
+### `raw_lyrics_test_dataset.csv`
+
+CSV file that contains the raw lyrics of the testing data.
+
+### `raw_lyrics_train_dataset.csv`
+
+CSV file that contains the raw lyrics of the training data.
+
+### `raw_lyrics.csv`
+
+CSV file with headers [Artist, Song Title, Stemmed With Stop Words, Stemmed No Stop Words, Row_Index, Genre].
+
+### `requirements.txt`
+
+Text file that contains the necessary libraries and versions.
+
+### `ricardosongs422.csv`
+
+CSV file containing a part of the dataset with headers [Artist, Song Title, Genre]
+
 ### `song_chart.csv`
 
 CSV file where each row is a song. The columns are as follows: Artist Name, Artist ID, Song Name, Song ID, Song Lyrics.
+
+### `songs_final422.csv`
+
+CSV file with headers [Artist, Song Title, Stemmed With Stop Words, Stemmed No Stop Words, Row_Index, Genre], where the song title is tokenized.
+
+### `songs420_header.csv`
+
+CSV file with headers [Artist, random, Song Title, random2, Lyrics].
+
+### `songs420.csv`
+
+CSV file that is identical to `songs420_header.csv` without the header row.
+
+### `songs422.csv`
+
+CSV file with headers [Artist, Song Title, Stemmed With Stop Words, Stemmed No Stop Words, Row_Index].
+
+### `streamedsongs421.csv`
+
+CSV file with headers [Song Title, Stemmed], which contains songs and their stemmed lyrics.
+
+### `tiffanysongs422.csv`
+
+CSV file with headers [Artist, Song Title, Genre].
+
+### `tokenized_dataset_genre_labels.csv`
+
+CSV file with headers [Artist, Song Title, Stemmed With Stop Words, Stemmed No Stop Words, Row_Index, Genre, Genre_Label].
 
 ### `top_spotify_artists.csv`
 
 Text file that contains the top Spotify artists.
 
-### 'top_spotify_songs.csv'
+### `top_spotify_songs.csv`
 
 Text file countating the top 2500 Spotify songs.

@@ -9,4 +9,12 @@ scipy==1.10.1
 scikit-learn==1.3.0
 mistralai
 pandas
+<<<<<<< HEAD
 tensorflow==2.19.0
+=======
+tensorflow==2.19.0
+gensim==4.3.3
+langdetect==1.0.9
+keras==3.9.2
+matplotlib
+>>>>>>> dbf2db0b8fb0c2cda372912062051f894057de0d
