@@ -1,11 +1,71 @@
-# genre-classifier
+# 🎵 NLP-Based Music Genre Classification
 
+**Classifying songs into genres using lyrics**
 
-## Installation & Usage
+## Overview
+This project leverages Natural Language Processing (NLP) and machine learning to classify songs into music genres based on their lyrics. We scraped data from Spotify's top artists and songs, then applied multiple classification models to determine how accurately song lyrics alone can predict genre.
 
-All libraries that should be installed are in requirements.txt. Ensure you have the libraries installed:
+View our final presentation slide deck:
+📎 [Genre Classification - NLP final project.pptx.pdf](https://github.com/user-attachments/files/20141274/Genre.Classification.-.NLP.final.project.pptx.pdf)
 
-    pip install -r requirements.txt
+## 📂 Dataset
+We built a custom dataset by scraping popular artist data from Spotify and pairing it with songs and lyrics with the Genius API along with genre information with the TheAudioDB API.
+
+- Artists: Top 1,000 Spotify artists (scraped)
+- Songs per Artist: ~15 songs each
+- Lyrics: Collected via the Genius API using the LyricsGenius Python library
+- Genres: Tagged using TheAudioDB API
+- Final Dataset Size: ~10,000 entries
+- Data Fields:
+    - artist_name
+    - song_title
+    - lyrics
+    - genre
+
+This dataset captures a wide variety of mainstream music across multiple genres, making it suitable for supervised learning on lyrical genre classification.
+
+## 🧠 Models Used
+- Naive Bayes
+- SVM
+- Feed Forward NN
+- Mistral LLM
+- BERT
+
+## 📊 Evaluation
+We used accuracy, precision, recall, and F1-score to evaluate model performance across genres such as:
+- Pop
+- Hip-Hop
+- Country
+- Rock
+- R&B
+The best-performing model was Mistral with an accuracy of 68%.
+
+## 📈 Results Snapshot
+| Model                           | Accuracy | F1 Score |
+| ------------------------------- | -------- | -------- |
+| Stratified Baseline             | 24%      | 17%      |
+| Naive Bayes                     | 53%      | 39%      |
+| SVM                             | 50%      | 47%      |
+| Feed Forward NN - bag of words  | 54%      | 46%      |
+| Feed Forward NN - word2vec      | 53%      | 40%      |
+| Mistral LLM                     | 68%      | 60%      |
+| BERT                            | 65%      | 64%      |
+
+## 🛠️ Tools & Libraries
+- Python, scikit-learn, pandas, numpy
+- BeautifulSoup & requests (for web scraping)
+- Hugging Face Transformers
+- Matplotlib / Seaborn for visualizations
+
+## 💡 Key Insights
+- Lyrics alone provide a strong signal for genre classification, especially for genres with distinctive vocabularies (e.g. rap).
+- Simpler models like Naive Bayes perform decently well, but transformer-based models offer improved performance.
+- Genre overlap and ambiguous lyrics can reduce classification accuracy.
+
+## 🚀 How to Run
+git clone https://github.com/your-repo/genre-classifier.git
+cd genre-classifier
+pip install -r requirements.txt
 
 ### Data Acquisiton & Enabling Genius Search
 
@@ -40,7 +100,7 @@ It should be noted that some artists, like 50 Cent and Jay-Z, are unable to have
 
 **Running `genre_sort.py` will generate text files within the `genres/` directory.**
 
-## Authors
+## Contributors
 
 This project is a collaborative effort between Momoka Iwase, Tiffany Kwak, Brian Kwan, Ricardo Perez, and Andrew Pham.
 
@@ -54,282 +114,12 @@ The documentation for the LyricsGenius library can be found [here](https://lyric
 
 TheAudioDB API's documentation can be found [here](https://www.theaudiodb.com/).
 
-## To Do
-
-**Solved 4/1/2025:** ~~Implement a tracker to workaround API timeouts.~~
-
-**Solved 4/2/2025:** ~~Implement a way to keep the Genius search running even after a timeout.~~
-
-**Solved 4/4/2025:** ~~Add a search limit to prevent infinitely searching an artist in case their search keeps timing out.~~
-
-**Solved 4/9/2025:** ~~Scrape another 500 artists.~~
-
-**Solved 4/9/2025:** ~~Added genre sort with known song tracker.~~
-
-**Solved 4/14/2025:** ~~Genre classifying takes a really long time because of the method of search. We should try to find a better way to tag them, but with the specific tags that Genius gives us this may be difficult.~~
-
-**Solved 4/15/2025:** ~~TheAudioDB API allows us to easily sort by genres; however, we are waiting on an API key to properly utilize it.~~
-
-**Solved 4/16/2025:** ~~Add more songs to account for the amount that will need to be cut from the final dataset.~~
-
-**Solved:** ~~Genre sort the new songs.~~
-
-**TODO:** Update README and repository; comment code in `modeling/` and `dataset_raw_lyrics.py` in `functions/`. Look over File Hierarchy, especially for the CSV files left in the root directory.
-
 ## File Hierarchy
-
-This is an overview of the files and directories in this repository.
-
-### `classification/`
-
-Directory containing different data classification methods.
-
-#### `Bert.ipynb`
-
-Jupyter Notebook file that builds a BERT model to classify song genres, and prints evaluation metrics.
-
-#### `ffnn_bow.py`
-
-Python file that builds a Feed Forward Neural Network model using bag of words to classify song genres, and prints evaluation metrics.
-
-#### `ffnn_w2v.py`
-
-Python file that builds a Feed Forward Neural Network model using word2vec word embeddings to classify song genres, and prints evaluation metrics.
-
-#### `llm_classify.py`
-
-Python file that builds a Mistral AI LLM model to classify song genres, and prints evaluation metrics.
-
-#### `naivebayesbagofwords.ipynb`
-
-Jupyter Notebook file that creates a Naive Bayes Bag of Words model.
-
-#### `nb,baseline, and plots.ipynb`
-
-Contains all metrics and plots for the Naive Bayes Bag of Words model.
-
-#### `RNN Training.ipynb`
-
-Jupyter Notebook file that intializes and trains the recurrent neural network.
-
-#### `SVM_songs.ipynb`
-
-Jupyter Notebook file that models the support vector machine.
-
-#### `test_train_split.py`
-
-Helper file that splits the dataset of untokenized lyrics into a 20/80 test/train split for the LLM and BERT Classifications.
-
-#### `word2vec embedding.ipynb`
-
-Jupyter Notebook file that models word2vec embeddings.
-
-### `data exploration/`
-
-Directory containing files relevant to data exploration.
-
-#### `cluster_1_titles.txt`
-
-Text file containing song titles in cluster 1.
-
-#### `cluster_2_titles.txt`
-
-Text file containing song titles in cluster 2.
-
-#### `cluster_3_titles.txt`
-
-Text file containing song titles in cluster 3.
-
-#### `cluster_4_titles.txt`
-
-Text file containing song titles in cluster 4.
-
-#### `cluster_5_titles.txt`
-
-Text file containing song titles in cluster 5.
-
-#### `cluster_6_titles.txt`
-
-Text file containing song titles in cluster 6.
-
-#### `get_titles.py`
-
-Python file that retrieves song titles from `streamedsongs421.csv` and saves them in `streamedsongs421_titles.txt`.
-
-#### `lyric_LDA_cluster.py`
-
-Python file that creates LDA clusters for song lyrics.
-
-#### `streamedsongs421_titles.txt`
-
-Text file containing all song titles.
-
-#### `title_cluster.py`
-
-Python file that creates k-means clusters for song titles.
-
-### `dataset/`
-
-Directory containing the dataset and any other relevant data.
-
-#### `applying_genrelabels.ipynb`
-
-Jupyter Notebook file that applies genre labels to songs.
-
-#### `combining genre txt.ipynb`
-
-Jupyter Notebook file that combines genres.
-
-#### `known.txt`
-
-Text file containing artists and songs that have already been searched.
-
-#### `makingfinaldataset.ipynb`
-
-Jupyter Notebook file that creates the final dataset.
-
-#### `nlp project data tokenization and filtering-2.ipynb`
-
-Jupyter Notebook file that tokenizes and filters song entries.
-
-#### `nlp project data tokenization and filtering.ipynb`
-
-Jupyter Notebook file that tokenizes and filters song entries.
-
-#### `raw_lyrics_generelabel_int.csv`
-
-CSV file with headers [Artist, Song Title, Genre, Lyrics, Genre_Label].
-
-#### `raw_lyrics_generelabel.csv`
-
-CSV file with headers [Artist, Song Title, Genre, Lyrics].
-
-#### `raw_lyrics_test_dataset.csv`
-
-CSV file that contains the raw lyrics of the testing data.
-
-#### `raw_lyrics_train_dataset.csv`
-
-CSV file that contains the raw lyrics of the training data.
-
-#### `raw_lyrics.csv`
-
-CSV file with headers [Artist, Song Title, Stemmed With Stop Words, Stemmed No Stop Words, Row_Index, Genre].
-
-#### `ricardosongs422.csv`
-
-CSV file containing a part of the dataset with headers [Artist, Song Title, Genre]
-
-#### `song_chart.csv`
-
-CSV file where each row is a song. The columns are as follows: Artist Name, Artist ID, Song Name, Song ID, Song Lyrics.
-
-#### `songs_final422.csv`
-
-CSV file with headers [Artist, Song Title, Stemmed With Stop Words, Stemmed No Stop Words, Row_Index, Genre], where the song title is tokenized.
-
-#### `songs420_header.csv`
-
-CSV file with headers [Artist, random, Song Title, random2, Lyrics].
-
-#### `songs420.csv`
-
-CSV file that is identical to `songs420_header.csv` without the header row.
-
-#### `songs422.csv`
-
-CSV file with headers [Artist, Song Title, Stemmed With Stop Words, Stemmed No Stop Words, Row_Index].
-
-#### `streamedsongs421.csv`
-
-CSV file with headers [Song Title, Stemmed], which contains songs and their stemmed lyrics.
-
-#### `tiffanysongs422.csv`
-
-CSV file with headers [Artist, Song Title, Genre].
-
-#### `tokenized_dataset_genre_labels.csv`
-
-CSV file with headers [Artist, Song Title, Stemmed With Stop Words, Stemmed No Stop Words, Row_Index, Genre, Genre_Label].
-
-#### `top_spotify_artists.csv`
-
-Text file that contains the top Spotify artists.
-
-#### `top_spotify_songs.csv`
-
-Text file countating the top 2500 Spotify songs.
-
-### `functions/`
-
-Directory containing essential functions.
-
-#### `avg_token_per_song.py`
-
-Python file that calculates the average token per song.
-
-#### `chart_helper.py`
-
-Python file that contains helper functions for creating the song chart.
-
-#### `dataset_raw_lyrics.py`
-
-Python file that generates the dataset of untokenized lyrics. Output is raw_lyrics_genrelabel.csv that has columns of Artist, Song Title, Genre, Lyrics.
-
-#### `genre_mapping.py`
-
-Python file that maps genre labels as strings into integers that tag each genre. Output is raw_lyrics_genrelabel_int.csv which is identical to raw_lyrics_genrelabel.csv except with an added column of Genre_Label with the integer tags of each genre.
-
-#### `genre_sort.py`
-
-Python file that sorts songs by their genre tag using TheAudioDB API.
-
-#### `get_top.py`
-
-Python file that scrapes the top Spotify artists and saves them in `top_500_spotify_artists.csv`. The number of artists saved is specified within the file.
-
-#### `header.py`
-
-Python file that duplicates `songs420.csv` with headers as `songs420_header.csv`.
-
-#### `make_song_chart.py`
-
-Python file that creates the song chart, saved in `song_chart.csv`.
-
-### `genres/`
-
-Directory containing respective genre directories.
-
-#### `Country/`
-
-Directory containing country songs.
-
-#### `EDM/`
-
-Directory containing EDM songs.
-
-#### `Exclude/`
-
-Directory containing excluded songs.
-
-#### `Pop/`
-
-Directory containing pop songs.
-
-#### `R&B/`
-
-Directory containing R&B songs.
-
-#### `Rap/`
-
-Directory containing rap songs.
-
-#### `Rock/`
-
-Directory containing rock songs.
-
-### `requirements.txt`
-
-Text file that contains the necessary libraries and versions.
-
-
+.
+├── classification/ # Genre classification models (BERT, FFNN, SVM, Naive Bayes, LLM)
+├── data exploration/ # Clustering and analysis of lyrics and song titles
+├── dataset/ # Raw and processed datasets, tokenization and labeling notebooks
+├── functions/ # Utility scripts for scraping, processing, and dataset management
+├── genres/ # Organized folders for different song genres (Pop, Rap, Rock, etc.)
+├── requirements.txt # Python dependencies
+└── README.md
