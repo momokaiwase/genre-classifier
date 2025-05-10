@@ -51,10 +51,9 @@ The best-performing model was Mistral with an accuracy of 68%.
 | BERT                            | 65%      | 64%      |
 
 ## 🛠️ Tools & Libraries
-
-**Data Processing & Analysis**: pandas, NumPy, SciPy, evaluate
-**Natural Language Processing (NLP)**: Transformers, NLTK, Gensim, python-dotenv
-**Machine Learning & Classification**: scikit-learn, MistralAI API, tensorflow
+**Data Processing & Analysis**: pandas, NumPy, SciPy, evaluate  
+**Natural Language Processing (NLP)**: Transformers, NLTK, Gensim, python-dotenv  
+**Machine Learning & Classification**: scikit-learn, MistralAI API, tensorflow  
 **Web Scraping & APIs**: requests, BeautifulSoup4, lyricsgenius  
 
 ## 💡 Key Insights
