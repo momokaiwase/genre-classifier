@@ -1,7 +1,7 @@
 # 🎵 NLP-Based Music Genre Classification
 
 ## Overview
-This project leverages Natural Language Processing (NLP) and machine learning to classify songs into music genres based on their lyrics. We scraped data from Spotify's top artists and songs, then applied multiple classification models to determine how accurately song lyrics alone can predict genre.
+This project leverages Natural Language Processing (NLP) and machine learning to classify songs into music genres based on their lyrics. We scraped data from Spotify's top artists and songs by those artists, then applied multiple classification models to determine how accurately song lyrics alone can predict genre.
 
 View our final presentation slide deck:
 📎 [Music Genre Classification - NLP final project.pptx](https://docs.google.com/presentation/d/125M_7E9piEraMPXuhHWmFXRcabdIL83A/edit?usp=sharing&ouid=112610846148247704192&rtpof=true&sd=true)
@@ -15,8 +15,8 @@ We built a custom dataset by scraping popular artist data from Spotify and pairi
 - Genres: Tagged using TheAudioDB API
 - Final Dataset Size: ~10,000 entries
 - Data Fields:
-    - artist_name
-    - song_title
+    - artist name
+    - song title
     - lyrics
     - genre
 
@@ -63,6 +63,7 @@ The best-performing model was Mistral with an accuracy of 68%.
 
 ## 🚀 How to Run
 
+```bash
 git clone https://github.com/your-repo/genre-classifier.git
 cd genre-classifier
 pip install -r requirements.txt
