@@ -1,12 +1,12 @@
 # 🎵 NLP-Based Music Genre Classification
 
-**Classifying songs into genres using lyrics**
+*Classifying songs into genres using lyrics*
 
 ## Overview
 This project leverages Natural Language Processing (NLP) and machine learning to classify songs into music genres based on their lyrics. We scraped data from Spotify's top artists and songs, then applied multiple classification models to determine how accurately song lyrics alone can predict genre.
 
 View our final presentation slide deck:
-📎 [Genre Classification - NLP final project.pptx.pdf](https://github.com/user-attachments/files/20141274/Genre.Classification.-.NLP.final.project.pptx.pdf)
+📎 [Genre Classification - NLP final project.pptx.pdf]([https://github.com/user-attachments/files/20141274/Genre.Classification.-.NLP.final.project.pptx.pdf](https://docs.google.com/presentation/d/125M_7E9piEraMPXuhHWmFXRcabdIL83A/edit?usp=sharing&ouid=112610846148247704192&rtpof=true&sd=true))
 
 ## 📂 Dataset
 We built a custom dataset by scraping popular artist data from Spotify and pairing it with songs and lyrics with the Genius API along with genre information with the TheAudioDB API.
@@ -52,10 +52,10 @@ The best-performing model was Mistral with an accuracy of 68%.
 | BERT                            | 65%      | 64%      |
 
 ## 🛠️ Tools & Libraries
-- Python, scikit-learn, pandas, numpy
-- BeautifulSoup & requests (for web scraping)
-- Hugging Face Transformers
-- Matplotlib / Seaborn for visualizations
+**Data Processing & Analysis**: pandas, NumPy, SciPy, evaluate
+**Natural Language Processing (NLP)**: Transformers, NLTK, Gensim, python-dotenv
+**Machine Learning & Classification**: scikit-learn, MistralAI API, tensorflow
+**Web Scraping & APIs**: requests, BeautifulSoup4, lyricsgenius  
 
 ## 💡 Key Insights
 - Lyrics alone provide a strong signal for genre classification, especially for genres with distinctive vocabularies (e.g. rap).
@@ -115,11 +115,4 @@ The documentation for the LyricsGenius library can be found [here](https://lyric
 TheAudioDB API's documentation can be found [here](https://www.theaudiodb.com/).
 
 ## File Hierarchy
-.
-├── classification/ # Genre classification models (BERT, FFNN, SVM, Naive Bayes, LLM)
-├── data exploration/ # Clustering and analysis of lyrics and song titles
-├── dataset/ # Raw and processed datasets, tokenization and labeling notebooks
-├── functions/ # Utility scripts for scraping, processing, and dataset management
-├── genres/ # Organized folders for different song genres (Pop, Rap, Rock, etc.)
-├── requirements.txt # Python dependencies
-└── README.md
+<pre> ```text . ├── classification/ # Genre classification models (BERT, FFNN, SVM, Naive Bayes, LLM) ├── data exploration/ # Clustering and analysis of lyrics and song titles ├── dataset/ # Raw and processed datasets, tokenization and labeling notebooks ├── functions/ # Utility scripts for scraping, processing, and dataset management ├── genres/ # Organized folders for different song genres (Pop, Rap, Rock, etc.) ├── requirements.txt # Python dependencies └── README.md ``` </pre>
